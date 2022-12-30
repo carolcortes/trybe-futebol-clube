@@ -20,6 +20,15 @@ class MatchesController {
       return res.status(500).json({ message: err });
     }
   }
+
+  public async create(req: Request, res: Response) {
+    try {
+      const newMatch = await this.matchesService.create(req.body);
+      return res.status(201).json(newMatch);
+    } catch (err) {
+      return res.status(500).json({ message: err });
+    }
+  }
 }
 
 export default MatchesController;

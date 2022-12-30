@@ -5,7 +5,7 @@ import chaiHttp = require('chai-http');
 import { Response } from 'superagent';
 import App from '../app';
 import Match from '../database/models/Match';
-import matches, { matchesInProgress } from './mocks/matchesMocks';
+import matches, { matchesInProgress, newMatch, newMatchBody } from './mocks/matchesMocks';
 
 chai.use(chaiHttp);
 
@@ -40,5 +40,21 @@ describe('Testes do endpoint /matches', () => {
     chaiHttpResponse = await chai.request(app).get('/matches?inProgress=false');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
+  });
+
+  it('É possivel criar uma nova partida com os campos corretos', async () => {  
+    sinon.stub(Match, 'create').resolves(newMatch as any);
+
+    chaiHttpResponse = await chai.request(app).post('/matches').send(newMatchBody);
+
+    expect(chaiHttpResponse.status).to.be.equal(201);
+  });
+
+  it('Não é possivel criar uma nova partida com os campos incorretos', async () => {  
+    sinon.stub(Match, 'create').resolves(newMatch as any);
+
+    chaiHttpResponse = await chai.request(app).post('/matches').send({ homeTeam: 1 });
+
+    expect(chaiHttpResponse.status).to.be.equal(400);
   });
 });

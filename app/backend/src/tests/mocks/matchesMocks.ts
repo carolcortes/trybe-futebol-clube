@@ -103,4 +103,20 @@ export const matchesNotInProgress = [
   },
 ];
 
+export const newMatch = {
+    id: 49,
+    homeTeam: 16,
+    homeTeamGoals: 2,
+    awayTeam: 8,
+    awayTeamGoals: 2,
+    inProgress: true
+};
+
+export const newMatchBody = {
+  homeTeam: 16,
+  awayTeam: 8,
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+};
+
 export default matches;
