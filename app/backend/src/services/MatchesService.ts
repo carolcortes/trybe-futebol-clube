@@ -39,6 +39,14 @@ class MatchesService {
 
     return newMatch;
   };
+
+  public finish = async (id: number) => {
+    const match = await Match.findOne({ where: { id } });
+    if (!match) return { status: 404, message: 'Match not found' };
+
+    await Match.update({ inProgress: false }, { where: { id } });
+    return { status: 200, message: 'Finished' };
+  };
 }
 
 export default MatchesService;

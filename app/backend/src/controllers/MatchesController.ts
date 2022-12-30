@@ -29,6 +29,18 @@ class MatchesController {
       return res.status(500).json({ message: err });
     }
   }
+
+  public async finish(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const { status, message } = await this.matchesService.finish(Number(id));
+
+      return res.status(status).json({ message });
+    } catch (err) {
+      return res.status(500).json({ message: err });
+    }
+  }
 }
 
 export default MatchesController;
