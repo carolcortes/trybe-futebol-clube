@@ -119,4 +119,11 @@ export const newMatchBody = {
   awayTeamGoals: 2,
 };
 
+export const incorrectIdMatch = {
+  homeTeam: 166,
+  awayTeam: 8,
+  homeTeamGoals: 2,
+  awayTeamGoals: 2,
+};
+
 export default matches;
