@@ -10,9 +10,12 @@ class Token {
   }
 
   static verify(token: string) {
-    const decoded = jwt.verify(token, secret as string);
-
-    return decoded;
+    try {
+      const decoded = jwt.verify(token, secret as string);
+      return decoded;
+    } catch (err) {
+      return undefined;
+    }
   }
 }
 
