@@ -1,6 +1,6 @@
 import Team from '../database/models/Team';
 import Match from '../database/models/Match';
-import INewMatch from '../database/interfaces';
+import { INewMatch, IUpdateMatch } from '../database/interfaces';
 
 class MatchesService {
   public getAll = async () => {
@@ -46,6 +46,14 @@ class MatchesService {
 
     await Match.update({ inProgress: false }, { where: { id } });
     return { status: 200, message: 'Finished' };
+  };
+
+  public update = async (id: number, { homeTeamGoals, awayTeamGoals }: IUpdateMatch) => {
+    const match = await Match.findOne({ where: { id } });
+    if (!match) return { status: 404, message: 'Match not found' };
+
+    const updated = await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return { status: 200, message: updated };
   };
 }
 

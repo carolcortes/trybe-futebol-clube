@@ -96,4 +96,13 @@ describe('Testes do endpoint /matches', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(404);
   });
+
+  it('É possivel atualizar o placar de uma partida', async () => {
+    sinon.stub(Match, 'findOne').resolves(matches[0] as any)
+    sinon.stub(Match, 'update').resolves([ 1 ]);
+
+    chaiHttpResponse = await chai.request(app).patch('/matches/1');
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+  });
 });

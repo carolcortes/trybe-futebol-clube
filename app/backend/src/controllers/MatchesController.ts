@@ -53,6 +53,16 @@ class MatchesController {
       return res.status(500).json({ message: err });
     }
   }
+
+  public async update(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const { status, message } = await this.matchesService.update(Number(id), req.body);
+      return res.status(status).json({ message: status === 200 ? 'Updated' : message });
+    } catch (err) {
+      return res.status(500).json({ message: err });
+    }
+  }
 }
 
 export default MatchesController;
