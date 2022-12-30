@@ -105,4 +105,13 @@ describe('Testes do endpoint /matches', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(200);
   });
+
+  it('Retorna um erro na tentativa de atualizar uma partida com um time inexistente', async () => {
+    sinon.stub(Match, 'findOne').resolves(null)
+    sinon.stub(Match, 'update').resolves([ 0 ]);
+
+    chaiHttpResponse = await chai.request(app).patch('/matches/166');
+
+    expect(chaiHttpResponse.status).to.be.equal(404);
+  });
 });
