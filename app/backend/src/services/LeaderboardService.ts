@@ -65,6 +65,8 @@ class LeaderboardService {
       goalsBalance: 0,
       efficiency: 0,
     }));
+
+    console.log(teams[0].dataValues);
   };
 
   public getAll = async () => {
