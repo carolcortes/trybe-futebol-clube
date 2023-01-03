@@ -28,15 +28,18 @@ class LeaderboardService {
 
     matches.forEach((match) => {
       const teamIndex = this.leaderboardTeams.findIndex(({ id }) => id === match[currentTeam]);
-      const team = this.leaderboardTeams[teamIndex];
+      console.log('teamIndex', teamIndex);
+      if (teamIndex >= 0) {
+        const team = this.leaderboardTeams[teamIndex];
 
-      team.totalGames += 1;
-      team.goalsFavor += match[`${currentTeam}Goals`];
-      team.goalsOwn += match[`${opositeTeam}Goals`];
-      team.goalsBalance = team.goalsFavor - team.goalsOwn;
-      this.setGamePoints(teamIndex, currentTeam, match);
-      team.efficiency = Number(((team.totalPoints / (team.totalGames * 3)) * 100)
-        .toFixed(2));
+        team.totalGames += 1;
+        team.goalsFavor += match[`${currentTeam}Goals`];
+        team.goalsOwn += match[`${opositeTeam}Goals`];
+        team.goalsBalance = team.goalsFavor - team.goalsOwn;
+        this.setGamePoints(teamIndex, currentTeam, match);
+        team.efficiency = Number(((team.totalPoints / (team.totalGames * 3)) * 100)
+          .toFixed(2));
+      }
     });
   };
 
@@ -65,8 +68,6 @@ class LeaderboardService {
       goalsBalance: 0,
       efficiency: 0,
     }));
-
-    console.log(teams[0].dataValues);
   };
 
   public getAll = async () => {
@@ -83,6 +84,7 @@ class LeaderboardService {
     this.setTeams();
 
     const finishedMatches = await Match.findAll({ where: { inProgress: 'false' } });
+
     this.setPoints(finishedMatches, filter);
     this.sortTeams();
     return this.leaderboardTeams;
