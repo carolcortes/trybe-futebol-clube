@@ -13,9 +13,9 @@ export const newMatchValidation = (req: Request, res: Response, next: NextFuncti
   const { authorization } = req.headers;
   const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = req.body;
 
-  if (!homeTeam || !homeTeamGoals || !awayTeam || !awayTeamGoals) {
-    return res.status(400).json({ message: 'All fields must be filled' });
-  }
+  // if (!homeTeam || !homeTeamGoals || !awayTeam || !awayTeamGoals) {
+  //   return res.status(400).json({ message: 'All fields must be filled' });
+  // }
 
   if (homeTeam === awayTeam) {
     return res.status(422).json({

@@ -1,20 +1,20 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import TeamsService from '../services/TeamsService';
 
 class TeamsController {
   constructor(private teamsService: TeamsService = new TeamsService()) {}
 
-  public async getAll(_req: Request, res: Response) {
+  public async getAll(_req: Request, res: Response, next: NextFunction) {
     try {
       const teams = await this.teamsService.getAll();
 
       return res.status(200).json(teams);
     } catch (err) {
-      return res.status(500).json({ message: err });
+      next(err);
     }
   }
 
-  public async getById(req: Request, res: Response) {
+  public async getById(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
 
     try {
@@ -22,7 +22,7 @@ class TeamsController {
 
       return res.status(200).json(team);
     } catch (err) {
-      return res.status(500).json({ message: err });
+      next(err);
     }
   }
 }

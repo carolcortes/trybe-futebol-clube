@@ -6,9 +6,9 @@ const matchesController = new MatchesController();
 
 const matches = express.Router();
 
-matches.get('/', (req, res) => matchesController.getAll(req, res));
-matches.post('/', newMatchValidation, (req, res) => matchesController.create(req, res));
-matches.patch('/:id/finish', (req, res) => matchesController.finish(req, res));
-matches.patch('/:id', (req, res) => matchesController.update(req, res));
+matches.get('/', (req, res, next) => matchesController.getAll(req, res, next));
+matches.post('/', newMatchValidation, (req, res, next) => matchesController.create(req, res, next));
+matches.patch('/:id/finish', (req, res, next) => matchesController.finish(req, res, next));
+matches.patch('/:id', (req, res, next) => matchesController.update(req, res, next));
 
 export default matches;
