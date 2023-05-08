@@ -25,6 +25,16 @@
   - O TFC é um site informativo sobre partidas e classificações de futebol;
   - Para adicionar uma partida é necessário ter um token, portanto a pessoa deverá estar logada para fazer as alterações;
   
+  > **Usuário Admin:**
+  > email: admin@admin.com
+  > password: secret_admin
+  
+  > **Usuário Padrão:**
+  > email: user@user.com
+  > password: secret_user
+    
+  **script para build do app:** `npm run compose:up`
+  
   ...
   
   ![image](https://user-images.githubusercontent.com/98475840/236833597-b2314db6-dada-47a2-b59a-2c7189e41988.png)
